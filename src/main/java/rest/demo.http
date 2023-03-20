@@ -27,7 +27,13 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/neopo/api/Person
+GET http://localhost:8080/neopo/api/Person/1
 
 ###
 GET http://localhost:8080/neopo/api/Person/2
+
+###
+POST http://localhost:8080/neopo/api/xxx/addperson
+Content-Type: application/json
+
+{"firstName": "Nicolai", "lastName": "Olsen", "email": "olsen@hotmail.com"}
