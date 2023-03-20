@@ -2,7 +2,6 @@ GET http://localhost:8080/neopo/api/xxx
 
 ###
 
-
 POST http://localhost:8080/neopo/api/xxx
 Content-Type: application/json
 #User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
@@ -10,14 +9,19 @@ Content-Type: application/json
 {"str1": "test", "str2": "test"}
 
 ###
-
+startcode
 GET http://localhost:8080/neopo/api/xxx/2
 
 ###
 PUT  http://localhost:8080/neopo/api/xxx/2
 Content-Type: application/json
 
-{"str1": "aa", "str2": "bb"}
+{"str1": "a", "str2": "b"}
+
+
+
+
+
 
 ###
 POST http://localhost:8080/neopo/api/Person
@@ -32,8 +36,18 @@ GET http://localhost:8080/neopo/api/Person/1
 ###
 GET http://localhost:8080/neopo/api/Person/2
 
+
+
+
+
+
 ###
-POST http://localhost:8080/neopo/api/xxx/addperson
+GET http://localhost:8080/neopo/api/Hobby/
+
+###
+GET http://localhost:8080/neopo/api/Hobby/all
+###
+POST http://localhost:8080/neopo/api/Hobby
 Content-Type: application/json
 
-{"firstName": "Nicolai", "lastName": "Olsen", "email": "olsen@hotmail.com"}
+{"name": "fodbold", "description": "spark til bold"}

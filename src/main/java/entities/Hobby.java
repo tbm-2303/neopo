@@ -24,6 +24,14 @@ public class Hobby {
     private Set<Person> persons = new LinkedHashSet<>();
 
 
+    public Hobby() {
+    }
+
+    public Hobby(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
     public Long getId() {
         return id;
     }

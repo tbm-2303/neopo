@@ -2,9 +2,9 @@ package rest;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import dtos.HobbyDTO;
 import dtos.PersonDTO;
-import dtos.RenameMeDTO;
-import facades.FacadeExample;
+import facades.HobbyFacade;
 import facades.PersonFacade;
 import utils.EMF_Creator;
 
@@ -12,37 +12,36 @@ import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
-@Path("Person")
-public class PersonResource {
+@Path("Hobby")
+public class HobbyResource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
-    private static final PersonFacade FACADE = PersonFacade.getPersonFacade(EMF);
+    private static final HobbyFacade FACADE = HobbyFacade.getHobbyFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String demo() {
-        return "{\"msg\":\"person endpoint root\"}";
+        return "{\"msg\":\"hobby endpoint root\"}";
     }
-
 
 
     @GET
-    @Path("{id}")
+    @Path("all")
     @Produces({MediaType.APPLICATION_JSON})
-    public String getPersonById(@PathParam("id") int id) {
-        PersonDTO personDTO = FACADE.getById(id);
-        return GSON.toJson(personDTO);
+    public Response getAllHobbies() {
+        List<HobbyDTO> hobbies = FACADE.getAll();
+        String json = GSON.toJson(hobbies);
+        return Response.ok().entity(json).build();
     }
-
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response createPerson(String input) {
-        PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
-        System.out.println(personDTO);
-        personDTO = FACADE.create(personDTO);
-        return Response.ok().entity(personDTO).build();
+    public Response createHobby(String input) {
+        HobbyDTO hobbyDTO = GSON.fromJson(input, HobbyDTO.class);
+        System.out.println(hobbyDTO);
+        hobbyDTO = FACADE.create(hobbyDTO);
+        return Response.ok().entity(hobbyDTO).build();
     }
-
 }

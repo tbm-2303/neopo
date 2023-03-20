@@ -5,8 +5,10 @@
  */
 package facades;
 
+import dtos.HobbyDTO;
 import dtos.PersonDTO;
 import dtos.RenameMeDTO;
+import entities.Hobby;
 import entities.Person;
 import entities.RenameMe;
 import javax.persistence.EntityManagerFactory;
@@ -32,8 +34,15 @@ public class Populator {
         pf.create(new PersonDTO(new Person("Timmy","mortensen","timmy@hotmail.com")));
         pf.create(new PersonDTO(new Person("James","mortensen","James@hotmail.com")));
     }
+
+    public static void populateHobbies(){
+        EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
+        HobbyFacade hf = HobbyFacade.getHobbyFacade(emf);
+        hf.create(new HobbyDTO(new Hobby("badminton","spil med fjerbold")));
+
+    }
     
     public static void main(String[] args) {
-        populatePersons();
+        populateHobbies();
     }
 }

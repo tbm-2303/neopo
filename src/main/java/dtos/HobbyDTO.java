@@ -10,7 +10,8 @@ public class HobbyDTO {
     private long id;
     private String name;
     private String description;
-    
+
+
     public HobbyDTO() {
     }
 

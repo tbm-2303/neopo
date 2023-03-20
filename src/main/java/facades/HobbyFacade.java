@@ -1,8 +1,10 @@
 package facades;
 
 import dtos.HobbyDTO;
+import dtos.PersonDTO;
 import dtos.RenameMeDTO;
 import entities.Hobby;
+import entities.Person;
 import entities.RenameMe;
 
 import javax.persistence.EntityManager;
@@ -19,11 +21,11 @@ public class HobbyFacade {
     private static EntityManagerFactory emf;
 
     //Private Constructor to ensure Singleton
-    private HobbyFacade() {}
+    private HobbyFacade() {
+    }
 
 
     /**
-     *
      * @param _emf
      * @return an instance of this facade class.
      */
@@ -34,11 +36,10 @@ public class HobbyFacade {
         }
         return instance;
     }
+
     private EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
-
-
 
 
     public List<HobbyDTO> getAll() {
@@ -47,4 +48,19 @@ public class HobbyFacade {
         List<Hobby> hobbies = query.getResultList();
         return HobbyDTO.getDtos(hobbies);
     }
+
+
+    public HobbyDTO create(HobbyDTO hobbyDTO) {
+        Hobby h = new Hobby(hobbyDTO.getName(), hobbyDTO.getDescription());
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.persist(h);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new HobbyDTO(h);
+    }
+
 }
