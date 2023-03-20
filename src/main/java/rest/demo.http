@@ -18,3 +18,13 @@ PUT  http://localhost:8080/neopo/api/xxx/2
 Content-Type: application/json
 
 {"str1": "aa", "str2": "bb"}
+
+###
+POST http://localhost:8080/neopo/api/Person
+Content-Type: application/json
+
+{"firstName": "Nicolai", "lastName": "Olsen", "email": "olsen@hotmail.com"}
+
+###
+
+GET http://localhost:8080/neopo/api/Person/1
