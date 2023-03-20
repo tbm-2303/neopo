@@ -29,6 +29,11 @@ public class RenameMe implements Serializable {
         this.dummyStr1 = dummyStr1;
         this.dummyStr2 = dummyStr2;
     }
+    public RenameMe(Long id, String dummyStr1, String dummyStr2) {
+        this.id = id;
+        this.dummyStr1 = dummyStr1;
+        this.dummyStr2 = dummyStr2;
+    }
 
     public Long getId() {
         return id;

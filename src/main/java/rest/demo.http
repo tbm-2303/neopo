@@ -11,4 +11,10 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:8080/neopo/api/xxx/4
+GET http://localhost:8080/neopo/api/xxx/2
+
+###
+PUT  http://localhost:8080/neopo/api/xxx/2
+Content-Type: application/json
+
+{"str1": "aaa", "str2": "bbb"}

@@ -53,4 +53,19 @@ public class RenameMeResource {
         rmdto = FACADE.create(rmdto);
         return Response.ok().entity(rmdto).build();
     }
+
+    @PUT
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("{id}")
+    public Response updateExample(@PathParam("id") int id, String input) throws Exception {
+        RenameMeDTO update = GSON.fromJson(input, RenameMeDTO.class);
+        System.out.println(update);
+        update.setId(id);
+        update = FACADE.update(update);
+        return Response.ok().entity(update).build();
+    }
+
+
+
 }
