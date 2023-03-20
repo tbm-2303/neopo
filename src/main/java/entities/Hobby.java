@@ -24,8 +24,12 @@ public class Hobby {
     private Set<Person> persons = new LinkedHashSet<>();
 
 
-
-    
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public Set<Person> getPersons() {
         return persons;
     }

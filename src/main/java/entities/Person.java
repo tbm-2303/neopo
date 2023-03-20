@@ -29,6 +29,14 @@ public class Person {
 
 
 
+    // add + remove
+    public void addHobby(Hobby hobby){
+        this.hobbies.add(hobby);
+        if (hobby == null){
+
+        }
+    }
+
 
 
     //getters+Setters
@@ -50,10 +58,16 @@ public class Person {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    public String getName() {
+    public String getFirstName() {
         return firstName;
     }
-    public void setName(String firstName) {
+    public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 }
