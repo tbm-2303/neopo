@@ -8,9 +8,7 @@ Content-Type: application/json
 
 {"str1": "test", "str2": "test"}
 
-###
-startcode
-GET http://localhost:8080/neopo/api/xxx/2
+
 
 ###
 PUT  http://localhost:8080/neopo/api/xxx/2
