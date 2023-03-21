@@ -12,7 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("Person")
+@Path("Phone")
 public class PhoneResource {
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory();
     private static final PhoneFacade FACADE = PhoneFacade.getPhoneFacade(EMF);
