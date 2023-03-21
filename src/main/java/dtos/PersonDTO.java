@@ -17,18 +17,16 @@ public class PersonDTO {
     public PersonDTO() {
     }
 
-    public PersonDTO(Person person){
-        if (person.getId() != null){
+    public PersonDTO(Person person) {
+        if (person.getId() != null) {
             this.id = person.getId();
         }
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.email = person.getEmail();
         //this.hobbies = HobbyDTO.getDtos(person.getHobbies());
-        person.getHobbies().forEach(hobby->this.hobbies.add(new HobbyDTO(hobby)));
+        person.getHobbies().forEach(hobby -> this.hobbies.add(new HobbyDTO(hobby)));
     }
-
-
 
 
     public long getId() {
@@ -50,7 +48,8 @@ public class PersonDTO {
         this.lastName = lastName;
     }
     public String getEmail() {
-        return email; }
+        return email;
+    }
     public void setEmail(String email) {
         this.email = email;
     }

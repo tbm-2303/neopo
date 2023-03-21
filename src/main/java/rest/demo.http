@@ -22,7 +22,7 @@ Content-Type: application/json
 
 
 ###
-POST http://localhost:8080/neopo/api/Person
+POST http://localhost:8080/neopo/api/Person/create
 Content-Type: application/json
 
 {"firstName": "Nicolai", "lastName": "Olsen", "email": "olsen@hotmail.com"}
