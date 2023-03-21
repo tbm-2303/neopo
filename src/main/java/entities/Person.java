@@ -15,7 +15,7 @@ public class Person {
     @Column(name = "firstName", length = 35)
     private String firstName;
 
-    @Column(name = "last_name", length = 35)
+    @Column(name = "lastName", length = 35)
     private String lastName;
 
     @Column(name = "email", length = 35)
