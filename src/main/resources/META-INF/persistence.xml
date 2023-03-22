@@ -5,6 +5,7 @@
     <persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
         <class>entities.Person</class>
         <class>entities.Hobby</class>
+        <class>entities.Phone</class>
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <!--    <class>entities.RenameMe</class>-->
         <exclude-unlisted-classes>false</exclude-unlisted-classes>

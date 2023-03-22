@@ -27,8 +27,8 @@ public class Person {
             inverseJoinColumns = @JoinColumn(name = "hobbies_id"))
     private Set<Hobby> hobbies = new LinkedHashSet<>();
 
-
-
+    @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
+    private Set<Phone> phones = new LinkedHashSet<>();
 
 
     public Person() {
@@ -38,6 +38,24 @@ public class Person {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+
+    public Person(Long id, String firstName, String lastName, String email, Set<Hobby> hobbies, Set<Phone> phones) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.hobbies = hobbies;
+        this.phones = phones;
+    }
+
+    public Person(String firstName, String lastName, String email, Set<Hobby> hobbies, Set<Phone> phones) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.hobbies = hobbies;
+        this.phones = phones;
     }
 
     // add + remove
@@ -51,6 +69,13 @@ public class Person {
 
 
     //getters+Setters
+
+    public Set<Phone> getPhones() {
+        return phones;
+    }
+    public void setPhones(Set<Phone> phones) {
+        this.phones = phones;
+    }
     public Set<Hobby> getHobbies() {
         return hobbies;
     }
