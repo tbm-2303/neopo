@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.PersonDTO;
 import dtos.RenameMeDTO;
+import errorhandling.NotFoundException;
 import errorhandling.PersonNotFoundException;
 import facades.FacadeExample;
 import facades.PersonFacade;
@@ -55,4 +56,29 @@ public class PersonResource {
     }
 
 
+    //get number of people with given interest
+    @GET
+    @Path("/getAllByHobby/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getNumberOfPeopleWithGivenHobby(@PathParam("id") int id) throws NotFoundException {
+        int amountOfPersons= FACADE.getNumberOfPeopleWithGivenHobby(id);
+        return Response.ok().entity("{\"amount\":"+amountOfPersons+"}").build();
+    }
+
+    @GET
+    @Path("/persons/{hobbyID}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getAllPersonsByHobby(@PathParam("hobbyID") int hobbyID)  {
+        List<PersonDTO> personDTOList = FACADE.getPersonsByHobby(hobbyID);
+        return Response.ok().entity(GSON.toJson(personDTOList)).build();
+    }
+
+    //add hobby to person
+    @POST
+    @Path("addhobby/{person_id}/{hobby_id}")
+    @Produces("application/json")
+    public Response addHobbyToPersonByIds(@PathParam("person_id") int person_id, @PathParam("hobby_id") int hobby_id) {
+        PersonDTO person = FACADE.addHobbyToPersonByIds(person_id, hobby_id);
+        return Response.ok().entity(GSON.toJson(person)).build();
+    }
 }

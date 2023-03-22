@@ -5,7 +5,9 @@ import dtos.PersonDTO;
 import dtos.PhoneDTO;
 import dtos.RenameMeDTO;
 import entities.*;
+import errorhandling.NotFoundException;
 import errorhandling.PersonNotFoundException;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -52,15 +54,18 @@ public class PersonFacade {
     public PersonDTO create(PersonDTO personDTO) throws PersonNotFoundException {
         EntityManager em = getEntityManager();
         Person p = new Person(personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmail());
+/*
         for (HobbyDTO hobbyDTO : personDTO.getHobbies()) {
             p.addHobby(new Hobby(hobbyDTO));
         }
+
+ */
         for (PhoneDTO phoneDTO : personDTO.getPhones()) {
             p.addPhone(new Phone(phoneDTO));
         }
         Address a = new Address(personDTO.getAddress().getStreet(), personDTO.getAddress().getInfo());
         //a = checkIfAddressExists(a, personDTO.getAddress().getCity().getId());
-        City c = (em.find(City.class, personDTO.getAddress().getCity().getId()));//finding the city
+        City c = em.find(City.class, personDTO.getAddress().getCity().getId());//finding the city
         a.addCity(c);//adding city to address.
         p.addAddress(a);
 
@@ -125,6 +130,52 @@ public class PersonFacade {
             em.close();
         }
         return addressFound;
+    }
+
+
+
+    public int getNumberOfPeopleWithGivenHobby(int hobbyId) throws NotFoundException {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Hobby> query = em.createQuery("select h FROM Hobby h WHERE h.id=:hobbyId", Hobby.class);
+            query.setParameter("hobbyId", hobbyId);
+            try {
+                Hobby hobby = query.getSingleResult();
+                return hobby.getPersons().size();
+            } catch (Exception e) {
+                throw new NotFoundException("Cant find hobby with the given id");
+            }
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<PersonDTO> getPersonsByHobby(int hobbyid) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<PersonDTO> query = em.createQuery("SELECT new dtos.PersonDTO(p) FROM Person p join p.hobbies h where h.id=:hobbyid", PersonDTO.class);
+            query.setParameter("hobbyid", hobbyid);
+            List<PersonDTO> personDTOs = query.getResultList();
+            return personDTOs;
+        } finally {
+            em.close();
+        }
+    }
+
+    public PersonDTO addHobbyToPersonByIds(int person_id, int hobby_id) {
+        EntityManager em = emf.createEntityManager();
+        Person person = em.find(Person.class, person_id);
+        Hobby hobby = em.find(Hobby.class, hobby_id);
+        person.addHobby(hobby);
+        try {
+            em.getTransaction().begin();
+            em.persist(hobby);
+            em.persist(person);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+        return new PersonDTO(person);
     }
 
 }

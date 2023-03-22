@@ -34,6 +34,7 @@ public class Hobby {
         this.description = description;
     }
     public Hobby(HobbyDTO hobbyDTO) {
+       this.id = hobbyDTO.getId();
         this.name = hobbyDTO.getName();
         this.description = hobbyDTO.getDescription();
     }

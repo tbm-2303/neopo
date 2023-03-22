@@ -150,12 +150,7 @@ Content-Type: application/json
   "firstName": "metthew",
   "lastName": "renodu",
   "email": "mizkif@hotmail.com",
-  "hobbies": [
-    {
-      "name": "steaming",
-      "description": "online streaming"
-    }
-  ],
+
   "phones": [
     {
       "number": "23773212",
@@ -185,9 +180,17 @@ Content-Type: application/json
   "email": "mizkif@hotmail.com",
   "hobbies": [
     {
-      "name": "steaming",
-      "description": "online streaming"
+      "id": 1,
+      "name": "basketball",
+      "desciption": "game"
+
+    },
+    {
+      "id": 23,
+      "name": "basketball",
+      "desciption": "game"
     }
+
   ],
   "phones": [
     {
@@ -195,7 +198,6 @@ Content-Type: application/json
       "description": "mizkif"
     }
   ],
-
   "address": {
     "street": "ve",
     "info": "ve",
@@ -203,8 +205,6 @@ Content-Type: application/json
       "id": 3
     }
   }
-
-
 }
 
 ###
@@ -224,3 +224,11 @@ Content-Type: application/json
 
 GET http://localhost:8080/neopo/api/Person/getAll
 
+###
+GET http://localhost:8080/neopo/api/Person/getAllByHobby/1
+
+###
+GET http://localhost:8080/neopo/api/Person/persons/1
+
+###
+POST http://localhost:8080/neopo/api/Person/addhobby/1/12
