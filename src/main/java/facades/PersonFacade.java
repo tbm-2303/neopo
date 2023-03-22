@@ -11,6 +11,7 @@ import entities.RenameMe;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 
 public class PersonFacade {
     private static PersonFacade instance;
@@ -48,10 +49,10 @@ public class PersonFacade {
     public PersonDTO create(PersonDTO personDTO) {
         Person p = new Person(personDTO.getFirstName(),personDTO.getLastName(),personDTO.getEmail());
         EntityManager em = getEntityManager();
-        /*if(!personDTO.getHobbies().isEmpty()){
-            p.setHobbies(personDTO.getHobbiesDTOS());
-        }
-         */
+
+
+
+
         for (HobbyDTO hobbyDTO : personDTO.getHobbies()){
             p.addHobby(new Hobby(hobbyDTO));
         }

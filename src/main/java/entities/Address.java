@@ -32,9 +32,10 @@ public class Address {
     public Address() {
     }
 
-    public Address(String street, String info) {
+    public Address(String street, String info, City city) {
         this.street = street;
         this.info = info;
+        this.city = city;
     }
 
 

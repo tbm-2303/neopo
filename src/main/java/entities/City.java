@@ -6,6 +6,9 @@ import java.util.Set;
 
 @Table(name = "city")
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "City.findCity", query = "select c from City c where c.zipcode = :zipcode")
+})
 public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
