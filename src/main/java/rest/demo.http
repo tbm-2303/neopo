@@ -47,11 +47,13 @@ Content-Type: application/json
   "firstName": "kent",
   "lastName": "mortensen",
   "email": "kent@hotmail.com",
-  "hobbies": [],
   "phones": [
     {
       "number": "12321232",
       "description": "james tele"
+    },{
+      "number": "122321232",
+      "description": "jame2s tele"
     }
   ]
 

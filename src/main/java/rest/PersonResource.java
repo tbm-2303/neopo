@@ -44,7 +44,7 @@ public class PersonResource {
         PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
         System.out.println(personDTO);
         personDTO = FACADE.create(personDTO);
-        return Response.ok().entity(personDTO).build();
+        return Response.ok().entity(GSON.toJson(personDTO)).build();
     }
 
 }
