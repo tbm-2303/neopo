@@ -1,8 +1,10 @@
 package facades;
 
 import dtos.PersonDTO;
+import dtos.PhoneDTO;
 import dtos.RenameMeDTO;
 import entities.Person;
+import entities.Phone;
 import entities.RenameMe;
 
 import javax.persistence.EntityManager;
@@ -44,9 +46,19 @@ public class PersonFacade {
     public PersonDTO create(PersonDTO personDTO) {
         Person p = new Person(personDTO.getFirstName(),personDTO.getLastName(),personDTO.getEmail());
         EntityManager em = getEntityManager();
+        if(!personDTO.getHobbies().isEmpty()){
+            p.setHobbies(personDTO.getHobbiesDTOS());
+        }
+        for (PhoneDTO phoneDTO : personDTO.getPhones()) {
+            p.addPhone(new Phone(phoneDTO));
+        }
+
         try {
             em.getTransaction().begin();
             em.persist(p);
+            for (Phone phone : p.getPhones()) {
+                em.persist(phone);
+            }
             em.getTransaction().commit();
         } finally {
             em.close();

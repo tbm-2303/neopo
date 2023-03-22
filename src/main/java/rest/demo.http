@@ -25,7 +25,7 @@ Content-Type: application/json
 POST http://localhost:8080/neopo/api/Person/create
 Content-Type: application/json
 
-{"firstName": "Nicolai", "lastName": "Olsen", "email": "olsen@hotmail.com"}
+{"firstName": "kent", "lastName": "mortensen", "email": "kent@hotmail.com"}
 
 ###
 
@@ -35,6 +35,28 @@ GET http://localhost:8080/neopo/api/Person/1
 GET http://localhost:8080/neopo/api/Person/2
 
 
+
+
+
+
+###
+POST http://localhost:8080/neopo/api/Person/create
+Content-Type: application/json
+
+{
+  "firstName": "kent",
+  "lastName": "mortensen",
+  "email": "kent@hotmail.com",
+  "hobbies": [],
+  "phones": [
+    {
+      "number": "12321232",
+      "description": "james tele"
+    }
+  ]
+
+
+}
 
 
 

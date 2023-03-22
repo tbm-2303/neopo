@@ -1,6 +1,8 @@
 package dtos;
 
+import entities.Hobby;
 import entities.Person;
+import entities.Phone;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +15,7 @@ public class PersonDTO {
     private String lastName;
     private String email;
     private Set<HobbyDTO> hobbies = new HashSet<>();
+    private Set<PhoneDTO> phones = new HashSet<>();
 
     public PersonDTO() {
     }
@@ -26,9 +29,28 @@ public class PersonDTO {
         this.email = person.getEmail();
         //this.hobbies = HobbyDTO.getDtos(person.getHobbies());
         person.getHobbies().forEach(hobby -> this.hobbies.add(new HobbyDTO(hobby)));
+        person.getPhones().forEach(phone -> this.phones.add(new PhoneDTO(phone)));
+
+
+
+    }
+
+    public Set<Hobby> getHobbiesDTOS(){
+        Set<Hobby> hobbies2 = new HashSet<>();
+        for (HobbyDTO hobbyDTO : hobbies) {
+            Hobby hobby = new Hobby(hobbyDTO.getName(),hobbyDTO.getDescription());
+            hobbies2.add(hobby);
+        }
+        return hobbies2;
     }
 
 
+    public Set<PhoneDTO> getPhones() {
+        return phones;
+    }
+    public void setPhones(Set<PhoneDTO> phones) {
+        this.phones = phones;
+    }
     public long getId() {
         return id;
     }
@@ -58,6 +80,19 @@ public class PersonDTO {
     }
     public void setHobbies(Set<HobbyDTO> hobbies) {
         this.hobbies = hobbies;
+    }
+
+
+    @Override
+    public String toString() {
+        return "PersonDTO{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", hobbies=" + hobbies +
+                ", phones=" + phones +
+                '}';
     }
 }
 

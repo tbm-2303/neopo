@@ -58,6 +58,9 @@ public class Person {
         this.phones = phones;
     }
 
+
+
+
     // add + remove
     public void addHobby(Hobby hobby){
         this.hobbies.add(hobby);
@@ -66,7 +69,10 @@ public class Person {
         }
     }
 
-
+    public void addPhone(Phone phone){
+        this.phones.add(phone);
+        phone.setPerson(this);
+    }
 
     //getters+Setters
 
