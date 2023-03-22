@@ -34,10 +34,10 @@ public class Address {
     public Address() {
     }
 
-    public Address(String street, String info, City city) {
+    public Address(String street, String info) {
         this.street = street;
         this.info = info;
-        this.city = city;
+
     }
 
     public Address(AddressDTO addressDTO) {

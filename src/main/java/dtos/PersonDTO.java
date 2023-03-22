@@ -4,7 +4,9 @@ import entities.Hobby;
 import entities.Person;
 import entities.Phone;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -23,6 +25,8 @@ public class PersonDTO {
     }
 
     public PersonDTO(Person person) {
+
+        this.id = person.getId();
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.email = person.getEmail();
@@ -32,8 +36,15 @@ public class PersonDTO {
         this.hobbies = HobbyDTO.getDtos(person.getHobbies());
         this.phones = PhoneDTO.getDtos(person.getPhones());
         this.address = new AddressDTO(person.getAddress()); // test test test
+    }
 
-
+    public PersonDTO(String firstName, String lastName, String email, Set<HobbyDTO> hobbies, Set<PhoneDTO> phones, AddressDTO address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.hobbies = hobbies;
+        this.phones = phones;
+        this.address = address;
     }
 
     public Set<Hobby> getHobbiesDTOS(){
@@ -43,6 +54,11 @@ public class PersonDTO {
             hobbies2.add(hobby);
         }
         return hobbies2;
+    }
+    public static List<PersonDTO> getDtos(List<Person> personList){
+        List<PersonDTO> personDTOS = new ArrayList();
+        personList.forEach(person->personDTOS.add(new PersonDTO(person)));
+        return personDTOS;
     }
 
     public AddressDTO getAddress() {
@@ -57,7 +73,7 @@ public class PersonDTO {
     public void setPhones(Set<PhoneDTO> phones) {
         this.phones = phones;
     }
-    public long getId() {
+    public int getId() {
         return id;
     }
     public void setId(int id) {

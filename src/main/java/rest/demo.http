@@ -28,10 +28,6 @@ Content-Type: application/json
 
 GET http://localhost:8080/neopo/api/Person/1
 
-###
-
-GET http://localhost:8080/neopo/api/Person/2
-
 
 
 
@@ -96,7 +92,23 @@ Content-Type: application/json
     }
   ]
 }
-### create person with hobbies and phone and address
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### create personwith hobbies and phone and address
 
 POST http://localhost:8080/neopo/api/Person/create
 Content-Type: application/json
@@ -118,27 +130,97 @@ Content-Type: application/json
     }
   ],
 
-  "addressDTO": {
+  "address": {
     "street": "gefionsparken",
     "info": "19 st.tv.",
-
-    "cityDTO": {
-      "zipcode": "3000",
-      "name": "Helsingør"
+    "city": {
+      "id": 1
     }
   }
 
 
 }
 
+### create personwith hobbies and phone and address
+
+POST http://localhost:8080/neopo/api/Person/create
+Content-Type: application/json
+
+{
+  "firstName": "metthew",
+  "lastName": "renodu",
+  "email": "mizkif@hotmail.com",
+  "hobbies": [
+    {
+      "name": "steaming",
+      "description": "online streaming"
+    }
+  ],
+  "phones": [
+    {
+      "number": "23773212",
+      "description": "mizkif"
+    }
+  ],
+
+  "address": {
+    "street": "ggh",
+    "info": "ggh",
+    "city": {
+      "id": 2
+    }
+  }
+
+
+}
+
+### create personwith hobbies and phone and address
+
+POST http://localhost:8080/neopo/api/Person/create
+Content-Type: application/json
+
+{
+  "firstName": "metthew",
+  "lastName": "renodu",
+  "email": "mizkif@hotmail.com",
+  "hobbies": [
+    {
+      "name": "steaming",
+      "description": "online streaming"
+    }
+  ],
+  "phones": [
+    {
+      "number": "23773212",
+      "description": "mizkif"
+    }
+  ],
+
+  "address": {
+    "street": "ve",
+    "info": "ve",
+    "city": {
+      "id": 3
+    }
+  }
+
+
+}
 
 ###
-GET http://localhost:8080/neopo/api/Hobby/
 
-###
-GET http://localhost:8080/neopo/api/Hobby/all
+GET http://localhost:8080/neopo/api/Person/2
+
+
 ###
 POST http://localhost:8080/neopo/api/Hobby
 Content-Type: application/json
 
 {"name": "fodbold", "description": "spark til bold"}
+
+
+
+###
+
+GET http://localhost:8080/neopo/api/Person/getAll
+

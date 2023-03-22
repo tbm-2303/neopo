@@ -13,6 +13,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Path("Person")
 public class PersonResource {
@@ -27,25 +28,31 @@ public class PersonResource {
         return "{\"msg\":\"person endpoint root\"}";
     }
 
-
-
+    @GET
+    @Path("getAll")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getPersonsWithHobby()  {
+        List<PersonDTO> list= FACADE.getAllPersons();
+        return Response.ok().entity(GSON.toJson(list)).build();
+    }
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public String getPersonById(@PathParam("id") int id) {
+    public Response getPersonById(@PathParam("id") int id) {
         PersonDTO personDTO = FACADE.getById(id);
-        return GSON.toJson(personDTO);
+        return Response.ok().entity(GSON.toJson(personDTO)).build();
     }
 
     @POST
     @Path("/create")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response createPerson(String input)  {
+    public Response createPerson(String input) throws PersonNotFoundException {
         PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
         System.out.println(personDTO);
         personDTO = FACADE.create(personDTO);
         return Response.ok().entity(GSON.toJson(personDTO)).build();
     }
+
 
 }

@@ -85,15 +85,17 @@ public class Person {
         this.phones.add(phone);
         phone.setPerson(this);
     }
+    public void addAddress(Address address){
+        this.address = address;
+        address.getPersons().add(this);
+    }
 
 
     //getters+Setters
     public Address getAddress() {
         return address;
     }
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+    public void setAddress(Address address) { this.address = address; }
     public Set<Phone> getPhones() {
         return phones;
     }
