@@ -63,4 +63,10 @@ public class City {
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
     }
+
+
+    public void addAddress(Address address) {
+       this.addresses.add(address);
+
+    }
 }

@@ -54,6 +54,15 @@ public class Person {
         this.hobbies = hobbies;
         this.phones = phones;
     }
+    public Person(int id, String firstName, String lastName, String email, Set<Hobby> hobbies, Set<Phone> phones, Address address) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.hobbies = hobbies;
+        this.phones = phones;
+        this.address = address;
+    }
 
     public Person(String firstName, String lastName, String email, Set<Hobby> hobbies, Set<Phone> phones) {
         this.firstName = firstName;

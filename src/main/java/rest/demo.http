@@ -5,15 +5,12 @@ GET http://localhost:8080/neopo/api/xxx
 POST http://localhost:8080/neopo/api/xxx
 Content-Type: application/json
 #User-Agent: Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion
-
 {"str1": "test", "str2": "test"}
 
-
-
 ###
+
 PUT  http://localhost:8080/neopo/api/xxx/2
 Content-Type: application/json
-
 {"str1": "a", "str2": "b"}
 
 
@@ -32,6 +29,7 @@ Content-Type: application/json
 GET http://localhost:8080/neopo/api/Person/1
 
 ###
+
 GET http://localhost:8080/neopo/api/Person/2
 
 
@@ -89,7 +87,6 @@ Content-Type: application/json
       "name": "mariocart",
       "description": "retro video game"
     }
-
   ],
 
   "phones": [
@@ -99,7 +96,40 @@ Content-Type: application/json
     }
   ]
 }
+### create person with hobbies and phone and address
 
+POST http://localhost:8080/neopo/api/Person/create
+Content-Type: application/json
+
+{
+  "firstName": "jacob",
+  "lastName": "borch",
+  "email": "borchaboi@hotmail.com",
+  "hobbies": [
+    {
+      "name": "mariocart",
+      "description": "retro video game"
+    }
+  ],
+  "phones": [
+    {
+      "number": "23773212",
+      "description": "jacob borchs telefon"
+    }
+  ],
+
+  "addressDTO": {
+    "street": "gefionsparken",
+    "info": "19 st.tv.",
+
+    "cityDTO": {
+      "zipcode": "3000",
+      "name": "Helsingør"
+    }
+  }
+
+
+}
 
 
 ###

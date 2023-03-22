@@ -1,5 +1,7 @@
 package entities;
 
+import dtos.AddressDTO;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -38,9 +40,20 @@ public class Address {
         this.city = city;
     }
 
+    public Address(AddressDTO addressDTO) {
+        this.street = addressDTO.getStreet();
+        this.info = addressDTO.getInfo();
+        }
 
 
 
+
+
+
+    public void addCity(City city){
+        this.city = city;
+        city.addAddress(this);
+    }
 
     public City getCity() {
         return city;

@@ -41,7 +41,7 @@ public class PersonResource {
     @Path("/create")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public Response createPerson(String input) throws PersonNotFoundException {
+    public Response createPerson(String input)  {
         PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
         System.out.println(personDTO);
         personDTO = FACADE.create(personDTO);

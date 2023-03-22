@@ -44,45 +44,22 @@ public class PersonFacade {
         Person p = em.find(Person.class, id);
 //        if (rm == null)
 //            throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
-        return new PersonDTO(p);
+       PersonDTO personDTO = new PersonDTO(p);
+       personDTO.setId(id);
+        return personDTO;
     }
 
-    public PersonDTO create(PersonDTO personDTO) throws PersonNotFoundException {
-        Person p = new Person(personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmail());
+    public PersonDTO create(PersonDTO personDTO) {
         EntityManager em = getEntityManager();
+        Person p = new Person(personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmail());
+        Address a = new Address(personDTO.getAddress());
+        City c = (em.find(City.class, personDTO.getAddress().getCity().getId()));//finding the city
+        //a.addCity(em.find(City.class, personDTO.getAddress().getCity().getId()));
+        a.addCity(c);//adding city to address.
 
-        // test test test
-        Query query = em.createNamedQuery("City.findCity");
-        query.setParameter("zipcode", personDTO.getAddress().getZipcode());
-        City city = (City) query.getSingleResult();
 
-        Address address = new Address(personDTO.getAddress().getStreet(), personDTO.getAddress().getInfo(), city);
-        try {
-            TypedQuery<Address> query1 = em.createQuery("select a from Address a where a.street = :street AND a.city = :city", Address.class);
-            query1.setParameter("street", address.getStreet());
-            query1.setParameter("city", address.getCity());
-            List<Address> addresses = query1.getResultList();
 
-            if (addresses.size() > 0) { // if the address exist all ready, set the address object equal to the found address.
-                address = query1.getSingleResult();
-            }
-        } catch (Exception e) {
-            throw new PersonNotFoundException("Address not found");
-        }
 
-        if (address.getId() == null) {// if the address did not exist, the id will be uninitialized(null).
-            // We therefore create the address in the db.
-
-            try {
-                em.getTransaction().begin();
-                em.persist(address);
-                em.getTransaction().commit();
-            } catch (Exception e) {
-                throw new PersonNotFoundException("could not persist address");
-            } finally {
-                em.close();
-            }
-        }
         for (HobbyDTO hobbyDTO : personDTO.getHobbies()) {
             p.addHobby(new Hobby(hobbyDTO));
         }
