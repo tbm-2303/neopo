@@ -34,13 +34,6 @@ public class Person {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
 
 
     public Person() {
@@ -73,12 +66,10 @@ public class Person {
 
 
 
-    // add + remove
+    // add methods
     public void addHobby(Hobby hobby){
         this.hobbies.add(hobby);
-        if (hobby == null){
-
-        }
+       hobby.getPersons().add(this);
     }
 
     public void addPhone(Phone phone){
@@ -86,8 +77,14 @@ public class Person {
         phone.setPerson(this);
     }
 
-    //getters+Setters
 
+    //getters+Setters
+    public Address getAddress() {
+        return address;
+    }
+    public void setAddress(Address address) {
+        this.address = address;
+    }
     public Set<Phone> getPhones() {
         return phones;
     }

@@ -12,6 +12,8 @@ import entities.Hobby;
 import entities.Person;
 import entities.RenameMe;
 import javax.persistence.EntityManagerFactory;
+
+import errorhandling.PersonNotFoundException;
 import utils.EMF_Creator;
 
 /**
@@ -28,7 +30,7 @@ public class Populator {
     }
 
 
-    public static void populatePersons(){
+    public static void populatePersons() throws PersonNotFoundException {
         EntityManagerFactory emf = EMF_Creator.createEntityManagerFactory();
         PersonFacade pf = PersonFacade.getPersonFacade(emf);
         pf.create(new PersonDTO(new Person("Timmy","mortensen","timmy@hotmail.com")));

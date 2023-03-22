@@ -17,6 +17,8 @@ public class PersonDTO {
     private Set<HobbyDTO> hobbies = new HashSet<>();
     private Set<PhoneDTO> phones = new HashSet<>();
 
+    private AddressDTO address;//test test test
+
     public PersonDTO() {
     }
 
@@ -29,6 +31,7 @@ public class PersonDTO {
         //person.getPhones().forEach(phone -> this.phones.add(new PhoneDTO(phone))); //trying something new
         this.hobbies = HobbyDTO.getDtos(person.getHobbies());
         this.phones = PhoneDTO.getDtos(person.getPhones());
+        this.address = new AddressDTO(person.getAddress()); // test test test
 
 
     }
@@ -42,7 +45,12 @@ public class PersonDTO {
         return hobbies2;
     }
 
-
+    public AddressDTO getAddress() {
+        return address;
+    }
+    public void setAddress(AddressDTO address) {
+        this.address = address;
+    }
     public Set<PhoneDTO> getPhones() {
         return phones;
     }
