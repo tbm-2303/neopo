@@ -6,6 +6,8 @@
         <class>entities.Person</class>
         <class>entities.Hobby</class>
         <class>entities.Phone</class>
+        <class>entities.Address</class>
+        <class>entities.City</class>
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <!--    <class>entities.RenameMe</class>-->
         <exclude-unlisted-classes>false</exclude-unlisted-classes>

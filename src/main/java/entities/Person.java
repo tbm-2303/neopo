@@ -30,6 +30,18 @@ public class Person {
     @OneToMany(mappedBy = "person", cascade = CascadeType.PERSIST)
     private Set<Phone> phones = new LinkedHashSet<>();
 
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
 
     public Person() {
     }
