@@ -1,8 +1,10 @@
 package facades;
 
+import dtos.HobbyDTO;
 import dtos.PersonDTO;
 import dtos.PhoneDTO;
 import dtos.RenameMeDTO;
+import entities.Hobby;
 import entities.Person;
 import entities.Phone;
 import entities.RenameMe;
@@ -46,8 +48,12 @@ public class PersonFacade {
     public PersonDTO create(PersonDTO personDTO) {
         Person p = new Person(personDTO.getFirstName(),personDTO.getLastName(),personDTO.getEmail());
         EntityManager em = getEntityManager();
-        if(!personDTO.getHobbies().isEmpty()){
+        /*if(!personDTO.getHobbies().isEmpty()){
             p.setHobbies(personDTO.getHobbiesDTOS());
+        }
+         */
+        for (HobbyDTO hobbyDTO : personDTO.getHobbies()){
+            p.addHobby(new Hobby(hobbyDTO));
         }
         for (PhoneDTO phoneDTO : personDTO.getPhones()) {
             p.addPhone(new Phone(phoneDTO));
@@ -58,6 +64,9 @@ public class PersonFacade {
             em.persist(p);
             for (Phone phone : p.getPhones()) {
                 em.persist(phone);
+            }
+            for (Hobby hobby : p.getHobbies()) {
+                em.persist(hobby);
             }
             em.getTransaction().commit();
         } finally {

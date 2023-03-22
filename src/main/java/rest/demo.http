@@ -60,6 +60,45 @@ Content-Type: application/json
 
 }
 
+### test 1
+POST http://localhost:8080/neopo/api/Person/create
+Content-Type: application/json
+
+{
+  "firstName": "jacob",
+  "lastName": "borch",
+  "email": "borchaboi@hotmail.com",
+  "phones": [
+    {
+      "number": "23773212",
+      "description": "jacob borchs telefon"
+    }
+  ]
+}
+### create person with hobbies
+
+POST http://localhost:8080/neopo/api/Person/create
+Content-Type: application/json
+
+{
+  "firstName": "jacob",
+  "lastName": "borch",
+  "email": "borchaboi@hotmail.com",
+  "hobbies": [
+    {
+      "name": "mariocart",
+      "description": "retro video game"
+    }
+
+  ],
+
+  "phones": [
+    {
+      "number": "23773212",
+      "description": "jacob borchs telefon"
+    }
+  ]
+}
 
 
 
