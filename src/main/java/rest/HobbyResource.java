@@ -27,14 +27,7 @@ public class HobbyResource {
     }
 
 
-    @GET
-    @Path("all")
-    @Produces({MediaType.APPLICATION_JSON})
-    public Response getAllHobbies() {
-        List<HobbyDTO> hobbies = FACADE.getAll();
-        String json = GSON.toJson(hobbies);
-        return Response.ok().entity(json).build();
-    }
+
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})

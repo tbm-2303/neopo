@@ -13,6 +13,7 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class HobbyFacade {
 
@@ -42,12 +43,6 @@ public class HobbyFacade {
     }
 
 
-    public List<HobbyDTO> getAll() {
-        EntityManager em = emf.createEntityManager();
-        TypedQuery<Hobby> query = em.createQuery("SELECT h FROM Hobby h", Hobby.class);
-        List<Hobby> hobbies = query.getResultList();
-        return HobbyDTO.getDtos(hobbies);
-    }
 
 
     public HobbyDTO create(HobbyDTO hobbyDTO) {

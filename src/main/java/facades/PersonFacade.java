@@ -63,6 +63,8 @@ public class PersonFacade {
         } finally {
             em.close();
         }
+        PersonDTO pDTO = new PersonDTO(p);
+        pDTO.setId(p.getId());
         return new PersonDTO(p);
     }
 

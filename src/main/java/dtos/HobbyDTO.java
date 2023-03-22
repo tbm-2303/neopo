@@ -2,8 +2,10 @@ package dtos;
 
 import entities.Hobby;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class HobbyDTO {
 
@@ -16,8 +18,7 @@ public class HobbyDTO {
     }
 
     public HobbyDTO(Hobby hobby) {
-        if (hobby.getId() != null)
-            this.id = hobby.getId();
+        this.id = hobby.getId();
         this.name = hobby.getName();
         this.description = hobby.getDescription();
     }
@@ -28,14 +29,17 @@ public class HobbyDTO {
     }
 
 
-    public static List<HobbyDTO> getDtos(List<Hobby> hobbies) {
-        List<HobbyDTO> hobbyDTOS = new LinkedList<>();
+    public static Set<HobbyDTO> getDtos(Set<Hobby> hobbies) {
+        Set<HobbyDTO> hobbyDTOS = new HashSet<>();
         for (Hobby hobby : hobbies) {
             HobbyDTO hobbyDTO = new HobbyDTO(hobby);
             hobbyDTOS.add(hobbyDTO);
         }
         return hobbyDTOS;
     }
+
+
+
 
     public long getId() {
         return id;

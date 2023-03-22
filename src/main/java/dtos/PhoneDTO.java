@@ -2,6 +2,9 @@ package dtos;
 
 import entities.Phone;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class PhoneDTO {
 
     private int id;
@@ -18,7 +21,14 @@ public class PhoneDTO {
         this.description = phone.getDescription();
     }
 
-
+    public static Set<PhoneDTO> getDtos(Set<Phone> phones) {
+        Set<PhoneDTO> phoneDTOS = new HashSet<>();
+        for (Phone phone : phones) {
+            PhoneDTO phoneDTO = new PhoneDTO(phone);
+            phoneDTOS.add(phoneDTO);
+        }
+        return phoneDTOS;
+    }
 
 
 

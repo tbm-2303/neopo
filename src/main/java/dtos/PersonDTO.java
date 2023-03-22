@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class PersonDTO {
 
-    private long id;
+    private int id;
     private String firstName;
     private String lastName;
     private String email;
@@ -21,16 +21,14 @@ public class PersonDTO {
     }
 
     public PersonDTO(Person person) {
-        if (person.getId() != null) {
-            this.id = person.getId();
-        }
         this.firstName = person.getFirstName();
         this.lastName = person.getLastName();
         this.email = person.getEmail();
         //this.hobbies = HobbyDTO.getDtos(person.getHobbies());
-        person.getHobbies().forEach(hobby -> this.hobbies.add(new HobbyDTO(hobby)));
-        person.getPhones().forEach(phone -> this.phones.add(new PhoneDTO(phone)));
-
+        //person.getHobbies().forEach(hobby -> this.hobbies.add(new HobbyDTO(hobby))); //trying something new
+        //person.getPhones().forEach(phone -> this.phones.add(new PhoneDTO(phone))); //trying something new
+        this.hobbies = HobbyDTO.getDtos(person.getHobbies());
+        this.phones = PhoneDTO.getDtos(person.getPhones());
 
 
     }
@@ -54,7 +52,7 @@ public class PersonDTO {
     public long getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
     public String getFirstName() {
