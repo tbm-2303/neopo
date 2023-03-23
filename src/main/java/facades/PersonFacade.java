@@ -187,4 +187,25 @@ public class PersonFacade {
         return new PersonDTO(person);
     }
 
+    public PersonDTO update(PersonDTO personDTO) throws PersonNotFoundException {
+        EntityManager em = emf.createEntityManager();
+        Person p = em.find(Person.class, personDTO.getId());
+        if (p == null){
+            throw new PersonNotFoundException("Cant find person entity with the given id");
+        }
+        try {
+            em.getTransaction().begin();
+            p.setFirstName(personDTO.getFirstName());
+            p.setLastName(personDTO.getLastName());
+            p.setEmail(personDTO.getEmail());
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new PersonNotFoundException("Cant edit person");
+
+        } finally {
+            em.close();
+        }
+        return new PersonDTO(p);
+    }
+
 }

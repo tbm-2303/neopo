@@ -81,4 +81,16 @@ public class PersonResource {
         PersonDTO person = FACADE.addHobbyToPersonByIds(person_id, hobby_id);
         return Response.ok().entity(GSON.toJson(person)).build();
     }
+
+
+    @PUT
+    @Path("edit/{id}")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public Response editPerson(@PathParam("id")int id,String input) throws PersonNotFoundException{
+        PersonDTO personDTO = GSON.fromJson(input, PersonDTO.class);
+        personDTO.setId(id);
+        PersonDTO personDTONew = FACADE.update(personDTO);
+        return Response.ok().entity(GSON.toJson(personDTONew)).build();
+    }
 }
