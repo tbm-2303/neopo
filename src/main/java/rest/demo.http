@@ -142,6 +142,10 @@ Content-Type: application/json
     {
       "number": "23773212",
       "description": "mizkif"
+    },
+    {
+      "number": "237736212",
+      "description": "mi6zkif"
     }
   ],
 
@@ -212,6 +216,7 @@ GET http://localhost:8080/neopo/api/Person/getAllByHobby/1
 //get persons with given hobby id
 ###
 GET http://localhost:8080/neopo/api/Person/persons/12
+
 //add hobby to person {person}/{hobby}
 ###
 POST http://localhost:8080/neopo/api/Person/addhobby/1/8
