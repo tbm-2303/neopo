@@ -47,6 +47,13 @@ public class PersonDTO {
         this.address = address;
     }
 
+    public PersonDTO(String firstName, String lastName, String email, Set<HobbyDTO> hobbies) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.hobbies = hobbies;
+    }
+
     public Set<Hobby> getHobbiesDTOS(){
         Set<Hobby> hobbies2 = new HashSet<>();
         for (HobbyDTO hobbyDTO : hobbies) {

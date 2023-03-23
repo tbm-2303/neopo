@@ -1,9 +1,6 @@
 package facades;
 
-import dtos.HobbyDTO;
-import dtos.PersonDTO;
-import dtos.PhoneDTO;
-import dtos.RenameMeDTO;
+import dtos.*;
 import entities.*;
 import errorhandling.NotFoundException;
 import errorhandling.PersonNotFoundException;
@@ -41,25 +38,28 @@ public class PersonFacade {
     }
 
 
-    public PersonDTO getById(int id) { //throws RenameMeNotFoundException {
+    public PersonDTO getById(int id) throws PersonNotFoundException { //throws RenameMeNotFoundException {
         EntityManager em = emf.createEntityManager();
         Person p = em.find(Person.class, id);
-//        if (rm == null)
-//            throw new RenameMeNotFoundException("The RenameMe entity with ID: "+id+" Was not found");
+        if (p == null)
+            throw new PersonNotFoundException("The Person entity with ID: "+id+" Was not found");
         PersonDTO personDTO = new PersonDTO(p);
         personDTO.setId(id);
         return personDTO;
     }
 
+    //TODO:
+    // if we create a person with a given address and city and then try to create a new person with the same
+    // address, we will get problems. So if the address exist, then the address and relation to city is already established.
+    // So we only need to add the new person to the address and then persist the person.
     public PersonDTO create(PersonDTO personDTO) throws PersonNotFoundException {
         EntityManager em = getEntityManager();
         Person p = new Person(personDTO.getFirstName(), personDTO.getLastName(), personDTO.getEmail());
-/*
+
         for (HobbyDTO hobbyDTO : personDTO.getHobbies()) {
-            p.addHobby(new Hobby(hobbyDTO));
+            p.addHobby(em.find(Hobby.class, hobbyDTO.getId())); //only cares about hobby id given in the request json.
         }
 
- */
         for (PhoneDTO phoneDTO : personDTO.getPhones()) {
             p.addPhone(new Phone(phoneDTO));
         }
@@ -71,17 +71,17 @@ public class PersonFacade {
 
         try {
             em.getTransaction().begin();
-            if (a.getId()!= null){
-                em.merge(a);
-            }
             em.persist(a);
             em.persist(p);
             for (Phone phone : p.getPhones()) {
                 em.persist(phone);
             }
+
             for (Hobby hobby : p.getHobbies()) {
                 em.persist(hobby);
             }
+
+
             em.getTransaction().commit();
         } finally {
             em.close();
@@ -105,33 +105,43 @@ public class PersonFacade {
         } finally {
             em.close();
         }
-
-
     }
 
+    public List<PersonDTO> getAllPersons2() {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Person> query = em.createQuery("SELECT p FROM Person p", Person.class);
+            List<Person> persons = query.getResultList();
+            List<PersonDTO> list = new ArrayList<>();
 
-
-    public Address checkIfAddressExists(Address address, int city_id){
-        EntityManager em = emf.createEntityManager();
-        Address addressFound;
-        try{
-            TypedQuery<Address> query = em.createQuery("SELECT a from Address a WHERE a.street=:street and a.info=:info and a.city.id =:city_id",Address.class);
-            query.setParameter("street",address.getStreet());
-            query.setParameter("info",address.getInfo());
-            query.setParameter("city_id",city_id);
-            try{
-                addressFound = query.getSingleResult();
-            }catch (NoResultException e){
-                e.printStackTrace();
-                address.addCity(em.find(City.class,city_id));
-                return address;
+            for (Person p : persons) {
+                list.add(new PersonDTO(p.getFirstName(), p.getLastName(), p.getEmail(), HobbyDTO.getDtos(p.getHobbies())));
             }
-        }finally {
+            return list;
+
+        } finally {
             em.close();
         }
-        return addressFound;
     }
 
+
+    public AddressDTO checkIfAddressExists(Address address) throws NotFoundException {
+        EntityManager em = getEntityManager();
+        Address addressFound;
+        try {
+            TypedQuery<Address> query = em.createQuery("SELECT a from Address a WHERE a.street=:street and a.info=:info", Address.class);
+            query.setParameter("street", address.getStreet());
+            query.setParameter("info", address.getInfo());
+            addressFound = query.getSingleResult();
+            return new AddressDTO(addressFound);
+        } catch (Exception e){
+            throw new NotFoundException("cant find the given address");
+
+        }
+        finally {
+            em.close();
+        }
+    }
 
 
     public int getNumberOfPeopleWithGivenHobby(int hobbyId) throws NotFoundException {
@@ -169,7 +179,6 @@ public class PersonFacade {
         person.addHobby(hobby);
         try {
             em.getTransaction().begin();
-            em.persist(hobby);
             em.persist(person);
             em.getTransaction().commit();
         } finally {

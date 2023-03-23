@@ -39,7 +39,7 @@ public class PersonResource {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Response getPersonById(@PathParam("id") int id) {
+    public Response getPersonById(@PathParam("id") int id) throws PersonNotFoundException {
         PersonDTO personDTO = FACADE.getById(id);
         return Response.ok().entity(GSON.toJson(personDTO)).build();
     }

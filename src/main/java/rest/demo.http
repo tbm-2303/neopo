@@ -104,6 +104,7 @@ Content-Type: application/json
   "email": "borchaboi@hotmail.com",
   "hobbies": [
     {
+      "id": 1,
       "name": "mariocart",
       "description": "retro video game"
     }
@@ -163,15 +164,10 @@ Content-Type: application/json
   "email": "mizkif@hotmail.com",
   "hobbies": [
     {
-      "id": 1,
-      "name": "basketball",
-      "desciption": "game"
-
+      "id": 8
     },
     {
-      "id": 23,
-      "name": "basketball",
-      "desciption": "game"
+      "id": 9
     }
 
   ],
